@@ -3,12 +3,13 @@ import If, { Else } from './If'
 
 export default (props) => {
 
-    const usuario = props.usuario || {};
+    const state = props.state || {};
 
     return (
         <div>
-            <If test={usuario && usuario.nome}>
-                Seja bem-vindo <strong>{usuario.nome}</strong>!
+            <If test={state && state.user.name}>
+                Seja bem-vindo <strong>{state.user.name}</strong>!
+                <span className="role">{state.user.role}</span>
                 <Else>
                     Seja bem-vindo!
                 </Else>
