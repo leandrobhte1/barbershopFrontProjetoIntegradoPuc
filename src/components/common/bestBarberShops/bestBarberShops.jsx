@@ -54,6 +54,5 @@ class BestBarberShops extends Component {
     }
 }
 
-
 const mapDispatchToProps = dispatch => bindActionCreators({initTab}, dispatch)
 export default connect(null, mapDispatchToProps)(BestBarberShops)

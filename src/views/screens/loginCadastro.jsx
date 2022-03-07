@@ -1,7 +1,9 @@
 import React, { useReducer } from 'react'
-import { initialState, reducer } from '../../store'
+import { initialState, rootReducer as reducer } from '../../store'
 import { login } from '../../store/actions/user'
 import Input from '../../components/common/Input';
+
+import { connect } from 'react-redux'
 
 const LoginCadastro = props => {
 
@@ -83,4 +85,13 @@ const LoginCadastro = props => {
     )
 }
 
-export default LoginCadastro;
+function mapDispatchToProps(dispatch) {
+    return {
+        logarUsuario(user) {
+            const action = login(user)
+            dispatch(action)
+        }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(LoginCadastro)

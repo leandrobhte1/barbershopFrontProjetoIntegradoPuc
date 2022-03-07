@@ -1,11 +1,12 @@
 import React, { useReducer } from 'react'
-import { initialState, reducer } from '../../store'
+import { initialState, rootReducer as reducer } from '../../store'
 // import MenuItem from './MenuItem'
 import UserImage from './images/userimage.png'
 import SideBar from './Sidebar'
 import UsuarioInfo from './UsuarioInfo'
 
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 const MenuUser = props => {
 
@@ -43,4 +44,10 @@ const MenuUser = props => {
 
 }
 
-export default MenuUser
+function mapStateToProps(state){
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps)(MenuUser)

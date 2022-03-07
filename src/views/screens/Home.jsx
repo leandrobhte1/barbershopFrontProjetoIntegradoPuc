@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react'
-import { initialState, reducer } from '../../store'
+import { initialState, rootReducer as reducer } from '../../store'
 
 import Input from '../../components/common/Input'
 import Vantagens from '../../components/common/vantagens/vantagens'
