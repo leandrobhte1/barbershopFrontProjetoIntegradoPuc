@@ -4,5 +4,7 @@ export function login(dispatch, user) {
     //     .then(resp => resp.json())
     //     .then(json => dispatch({ type: 'userList', payload: json}))
 
+    console.log("User action login: ", user);
+
     dispatch({type: 'login', payload: user })
 }
