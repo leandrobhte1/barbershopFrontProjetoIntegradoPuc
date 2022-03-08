@@ -8,6 +8,48 @@
     flex-direction: column;
 }
 
+.Content{
+    display: flex;
+    flex: 1;
+    margin-top: 70px;
+}
+
+.Menu{
+    display: flex;
+    flex-basis: 250px;
+    background-color: dodgerblue;
+}
+
+.Menu nav{
+    flex: 1;
+}
+
+.Menu ul{
+    list-style: none;
+    padding: 0;
+}
+
+.Menu li{
+    display: flex;
+}
+
+.Menu li a{
+    margin-bottom: 10px;
+    padding: 10px;
+    flex: 1;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.5rem;
+}
+
+.Menu li a:hover{
+    background-color: #00000020;
+}
+
+ul li a{
+    text-decoration: none !important;
+}
+
 .f18px{
     font-size: 18px;
 }
@@ -458,10 +500,10 @@ ul{
 .avaliacoes{
     display: flex;
     flex-direction: column;
-    padding-left: 100px;
     margin-top: 200px;
     background-color: #F7F7F7;
-    height: 500px;
+    height: 600px;
+    padding-bottom: 50px;
 }
 
 .avaliacoesHome{
@@ -932,6 +974,76 @@ ul{
 .top-menu.top-menu-user li a{
     color: #ffffff !important;
     text-decoration: none !important;
+}
+
+.dv-star-rating{
+    margin: 0 auto;
+}
+
+.swiper{
+    width: 80vw;
+    height: 100%;
+}
+
+.swiper .swiper-slide .card{
+    position: relative;
+}
+
+.swiper .swiper-slide .textCard{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background-color: #ffffff;
+    bottom: 0;
+    border-radius: 20px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.swiper .swiper-slide .textCard .nameUser{
+    color: #1e1e1e;
+    font-size: 18px;
+    margin-top: -10px;
+}
+
+.swiper .swiper-slide .textCard .service{
+    color: #c4c4c4;
+    font-size: 10px;
+}
+
+.swiper .swiper-slide .textCard .description{
+    color: #1e1e1e;
+    font-size: 12px;
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+
+.swiper .swiper-slide .textCard .user{
+    display: flex;
+    justify-content: center;
+}
+
+.swiper .swiper-slide .textCard .user .imgUser{
+    display: flex;
+    justify-content: center;
+    background-color: #ffffff;
+    margin-top: -20px;
+    border-radius: 100px;
+}
+
+.swiper-slide{
+    text-align: center;
+    font-size: 18px;
+    background: #ffffff;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-slide img{
+    display: block;
+    object-fit: cover;
 }
 
 .d-none{

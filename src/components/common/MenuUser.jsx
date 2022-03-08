@@ -18,13 +18,13 @@ const MenuUser = props => {
         <div className="menus col-md-4">
             <div className="naoLogado">
                 <ul className="top-menu top-menu-user">
-                    <li className={`${props.user ? 'd-flex' : 'd-none'}`}>
+                    <li className={`${props.user.name ? 'd-flex' : 'd-none'}`}>
                         <UsuarioInfo state={state } />
                     </li>
-                    <li className={`${props.user ? 'd-none' : 'd-flex'}`}>
+                    <li className={`${props.user.name ? 'd-none' : 'd-flex'}`}>
                         <Link to="login-cadastro">Login</Link>
                     </li>
-                    <li className={`${props.user ? 'd-none' : 'd-flex'}`}>
+                    <li className={`${props.user.name ? 'd-none' : 'd-flex'}`}>
                         <Link to="login-cadastro">Cadastrar</Link>
                     </li>
                 </ul>
@@ -46,7 +46,7 @@ const MenuUser = props => {
 
 function mapStateToProps(state){
     return {
-        user: state.user
+        user: state
     }
 }
 

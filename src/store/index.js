@@ -21,6 +21,7 @@ export function storeConfig() {
 export const initialState = {
     user: { name: '', role: '', logado: false},
     selected: '',
+    search: '',
     menuUserOpen: false,
     visible: {}
 }

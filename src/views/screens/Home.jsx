@@ -10,15 +10,27 @@ import Avaliacoes from '../../components/common/avaliacoes/avaliacoes'
 import LogoHome from '../../components/common/images/logo.png'
 import SearchIcon from '../../components/common/images/lupa.png'
 import banner from '../../components/common/images/banner.png'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { changeSearch } from '../../store/actions/searchHomeActions'
 
-
-function handleSearch() {
-    console.log("handleSearch");
-}
+import { useNavigate } from "react-router-dom";
 
 const Home = props => {
 
     const [state, dispatch] = useReducer(reducer, initialState)
+
+    const navigate = useNavigate();
+
+    const keyHandler = (e) => {
+        if(e.key === 'Enter') {
+            navigate("/search");
+        }
+    }
+
+    const goToSearchPage = () => {
+        navigate("/search");
+    }
 
     return (
 
@@ -29,8 +41,8 @@ const Home = props => {
             <h3 className='subtitleBanner poppins'>A comôdidade do seu lado!</h3>
             <h5 className='searchBanner poppins'>Pesquise pelo nome da barbearia ou serviço:</h5>
             <div className="searchBannerInput">
-                <Input placeholder="Digite aqui a sua busca"></Input>
-                <a href="#search">
+                <input id="searchHome" className='form-control' type="text" placeholder="Digite aqui a sua busca" onChange={props.changeSearch} value={props.search} onKeyUp={keyHandler} />
+                <a href="#" onClick={goToSearchPage}>
                     <img className='searchIcon' src={SearchIcon} alt="Pesquisar" />
                 </a>
             </div>
@@ -47,4 +59,7 @@ const Home = props => {
     
 }
 
-export default Home
+const mapStateToProps = state => ({search: state.search})
+const mapDispatchToProps = dispatch => bindActionCreators({ changeSearch }, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

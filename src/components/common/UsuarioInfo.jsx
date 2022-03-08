@@ -8,11 +8,11 @@ export default (props) => {
     return (
         <div>
             <If test={state && state.user.name}>
-                Seja bem-vindo <strong>{state.user.name}</strong>!
+                <span>Seja bem-vindo <strong>{state.user.name}</strong>!</span>    
                 <span className="role">{state.user.role}</span>
-                <Else>
-                    Seja bem-vindo!
-                </Else>
+                {/* <Else>
+                    <span>Seja bem-vindo amigão!</span>    
+                </Else> */}
             </If>
         </div>
     )
