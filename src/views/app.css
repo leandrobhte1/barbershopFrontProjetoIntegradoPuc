@@ -796,10 +796,11 @@ ul{
 
 .historico .lineBetween{
     width: 1px;
-    height: 88%;
+    height: 90%;
     background-color: #c4c4c4;
     position: absolute;
-    left: 270px
+    left: 270px;
+    margin-top: 50px;
 }
 
 .titleSectionHistorico{
@@ -812,7 +813,7 @@ ul{
 }
 
 .titleSectionHistorico .subtittle.dateHour{
-    flex-basis: 25%;
+    flex-basis: 47%;
 }
 
 .lineHistorico{
@@ -852,7 +853,7 @@ ul{
 
 .cardHistorico{
     background-color: #f2f2f2;
-    width: 300px;
+    width: 350px;
     height: 150px;
     padding: 20px;
     border-radius: 10px;
@@ -908,6 +909,13 @@ ul{
     margin-right: 20px;
 }
 
+.info .nameProfessional{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 50px;
+}
+
 .infoBarberShop .logoBarberShop{
     width: 120px;
     height: 120px;
@@ -928,7 +936,7 @@ ul{
     position: absolute;
     justify-content: space-between;
     bottom: 15px;
-    width: 270px;
+    width: 90%;
 }
 
 .reason{
@@ -945,6 +953,7 @@ ul{
     display: flex;
     flex-direction: column;
     color: #1E1E1E !important;
+    text-decoration: none !important;
 }
 
 .optionsCard a:hover{
@@ -963,7 +972,7 @@ ul{
 
 .avaliacao .question .form-control.textarea{
     height: 200px;
-    width: 100%;
+    width: 800px;
 }
 
 .avaliacao .question{
