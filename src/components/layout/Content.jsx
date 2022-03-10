@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 
 import About from '../../views/screens/About'
 import Home from '../../views/screens/Home'
+import Search from '../../views/screens/Search'
 import LoginCadastro from '../../views/screens/loginCadastro'
 import Param from '../../views/screens/Param'
 
@@ -14,6 +15,7 @@ const Content = props => (
             <Route path="/" exact element={<Home />}></Route>
             <Route path="/home" element={<Home />}></Route>
             <Route path="/login-cadastro" element={<LoginCadastro />}></Route>
+            <Route path="/search" element={<Search />}></Route>
             {/* <Route path="/param/:id" element={<Param />}></Route>
             <Route path="/about" element={<About />}></Route> */}
             <Route path="*" element={<Home />}></Route>

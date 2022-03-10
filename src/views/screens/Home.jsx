@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, useEffect } from 'react'
 import { initialState, rootReducer as reducer } from '../../store'
 
 import Input from '../../components/common/Input'
@@ -14,6 +14,8 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { changeSearch } from '../../store/actions/searchHomeActions'
 
+import { toastr } from 'react-redux-toastr'
+
 import { useNavigate } from "react-router-dom";
 
 const Home = props => {
@@ -24,11 +26,13 @@ const Home = props => {
 
     const keyHandler = (e) => {
         if(e.key === 'Enter') {
+            // incluir o termo pesquisado no state para levar pra proxima tela
             navigate("/search");
         }
     }
 
     const goToSearchPage = () => {
+        // incluir o termo pesquisado no state para levar pra proxima tela
         navigate("/search");
     }
 
@@ -41,7 +45,7 @@ const Home = props => {
             <h3 className='subtitleBanner poppins'>A comôdidade do seu lado!</h3>
             <h5 className='searchBanner poppins'>Pesquise pelo nome da barbearia ou serviço:</h5>
             <div className="searchBannerInput">
-                <input id="searchHome" className='form-control' type="text" placeholder="Digite aqui a sua busca" onChange={props.changeSearch} value={props.search} onKeyUp={keyHandler} />
+                <input id="searchHome" className='form-control' type="text" placeholder="Digite aqui a sua busca" onChange={props.changeSearch} value={props.state.search.search} onKeyUp={keyHandler} />
                 <a href="#" onClick={goToSearchPage}>
                     <img className='searchIcon' src={SearchIcon} alt="Pesquisar" />
                 </a>
@@ -59,7 +63,7 @@ const Home = props => {
     
 }
 
-const mapStateToProps = state => ({search: state.search})
+const mapStateToProps = state => ({state: state})
 const mapDispatchToProps = dispatch => bindActionCreators({ changeSearch }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

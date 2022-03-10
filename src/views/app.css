@@ -192,7 +192,6 @@ button{
 .top-menu{
     display: flex;
     list-style: none;
-    width: 500px;
     justify-content: space-evenly;
     height: 60px;
     padding-top: 20px;
@@ -203,7 +202,6 @@ button{
     justify-content: flex-end;
     display: flex;
     list-style: none;
-    width: 350px;
     height: 60px;
     padding-top: 20px;
 }
@@ -1044,6 +1042,27 @@ ul{
 .swiper-slide img{
     display: block;
     object-fit: cover;
+}
+
+.usuarioInfo{
+    display: flex;
+    flex-direction: row;
+}
+
+.usuarioInfo .imgUser{
+    margin-top: -15px;
+}
+
+.usuarioInfo .text{
+    display: flex;
+    flex-direction: column;
+}
+
+.usuarioInfo .role{
+    color: #E58411;
+    font-weight: bold;
+    align-self: flex-end;
+    margin-top: -5px;
 }
 
 .d-none{
