@@ -274,12 +274,13 @@ button{
 
 .home .searchBannerInput input{
     position: absolute;
+    cursor: pointer;
     top: 520px;
     width: 400px;
     border: 1px solid white;
     background-color: inherit;
     border-radius: 50px;
-    /* background: url('../components/common/images/lupa.png') no-repeat right 5px center; */
+    background: url('../components/common/images/lupa.png') no-repeat right 5px center;
     background-size: 25px;
     color: #ffffff;
 }
