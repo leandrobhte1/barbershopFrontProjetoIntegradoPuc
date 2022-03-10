@@ -1066,6 +1066,10 @@ ul{
     margin-top: -5px;
 }
 
+select:focus-visible{
+    outline: #c4c4c4 !important;
+}
+
 .d-none{
     display: none !important;
 }

@@ -45,7 +45,7 @@ const OptionsMenu = props => {
                 </li>
                 {isAdmin == true &&
                     <li>
-                        <a href='#relatorios'>
+                        <a href='#reports'>
                             <span>Relatórios</span>
                             <img className="iconMenuUserOpen relatoriosIcon" src={RelatoriosIcon} alt="Relatórios" />
                         </a>
