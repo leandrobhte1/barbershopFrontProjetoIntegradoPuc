@@ -46,9 +46,6 @@ const Home = props => {
             <h5 className='searchBanner poppins'>Pesquise pelo nome da barbearia ou serviço:</h5>
             <div className="searchBannerInput">
                 <input id="searchHome" className='form-control' type="text" placeholder="Digite aqui a sua busca" onChange={props.changeSearch} value={props.state.search.search} onKeyUp={keyHandler} />
-                <a href="#" onClick={goToSearchPage}>
-                    <img className='searchIcon' src={SearchIcon} alt="Pesquisar" />
-                </a>
             </div>
             <Vantagens></Vantagens>
             {/* <BestBarberShops></BestBarberShops> */}
