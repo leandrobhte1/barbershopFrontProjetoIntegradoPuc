@@ -22,10 +22,26 @@ class LoginCadastro extends Component{
         }
     }
 
+    handleLogin = (e) => {
+        e.preventDefault();
+        console.log("chegou no handleLogin");
+        let userLogin = {username: 'leandro.pereira@capco.com', password:"12345678"};
+        axios.post(`http://localhost:8080/login`, userLogin)
+        .then(resp => {
+            console.log("resp.: ", resp);
+            this.setState(resp.data)
+            toastr.success('Sucesso','Operação realizada com sucesso!')
+        })
+        .catch(e=> {
+            e.response.data.errors.forEach(error => toastr.error('Erro', error))
+        })
+    }
+
     handleRegisterUser(e){
+        e.preventDefault();
         console.log("chegou no handle register");
         
-        let user = { firstName: 'Leandro', lastName: 'Pereira', email: 'leandro.pereira@capco.com', role: 'User'};
+        let user = { firstName: 'Leandro', lastName: 'Pereira', cpf:"111111111-12", email: 'leandro.pereira@capco.com', password:"12345678", role: 'User'};
         axios.post(`${BASE_URL}/registration`, user)
         .then(resp => {
             console.log("resp.: ", resp);
@@ -42,7 +58,7 @@ class LoginCadastro extends Component{
         return(
             <div className="loginCadastro">
                 <div className="login">
-                    <form role="form" className='formCadastroRegistro'>
+                    <form className='formCadastroRegistro' onSubmit={this.handleLogin}>
                         <h1 className="poppins">Login</h1>
                         <div className="username">
                             <Input placeholder="Digite aqui o seu usuário"></Input>
@@ -51,7 +67,8 @@ class LoginCadastro extends Component{
                             <Input type="password" placeholder="Digite aqui a sua senha"></Input>
                         </div>
                         <div className="btLogin">
-                            <button type='submit' className='poppins'>LOGIN</button>
+                            <input type="submit" value="Login" />
+                            {/* <button type='submit' className='poppins'>LOGIN</button> */}
                         </div>
                         <div className="orLogin">
                             <div className="line"></div>
@@ -70,7 +87,7 @@ class LoginCadastro extends Component{
                 </div>
                 <div className="lineBetween"></div>
                 <div className="cadastro">
-                    <form role="form" className='formCadastroRegistro'>
+                    <form className='formCadastroRegistro' onSubmit={this.handleRegisterUser}>
                         <h1 className="poppins">Registre-se</h1>
                         <div className="username firstName">
                             <Input placeholder="Digite aqui o seu primeiro nome"></Input>
@@ -98,7 +115,8 @@ class LoginCadastro extends Component{
                             </div>
                         </div>
                         <div className="btRegistrar">
-                            <button type='submit' className='poppins' onClick={() => this.handleRegisterUser()}>REGISTRAR</button>
+                            <input type="submit" value="Registrar" />
+                            {/* <button type='submit' className='poppins' onClick={() => this.handleRegisterUser()}>REGISTRAR</button> */}
                         </div>
                         <div className="orLogin">
                             <div className="line"></div>
