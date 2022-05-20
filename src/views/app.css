@@ -527,6 +527,7 @@ ul{
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin: 0 auto;
 }
 
 .loginCadastro .login{
@@ -584,6 +585,23 @@ ul{
 }
 
 .btRegistrar button{
+    width: 200px;
+    border-radius: 50px;
+    background-color: #1E1E1E;
+    color: #ffffff;
+    height: 40px;
+}
+
+.btLogin .btnSubmit{
+    width: 200px;
+    border-radius: 50px;
+    background-color: #1E1E1E;
+    color: #ffffff;
+    height: 40px;
+    margin-bottom: 30px;
+}
+
+.btRegistrar .btnSubmit{
     width: 200px;
     border-radius: 50px;
     background-color: #1E1E1E;

@@ -1,146 +1,184 @@
-import React, { Component } from 'react'
-import { login } from '../../store/actions/user'
-import Input from '../../components/common/Input';
+import { useState } from "react";
 
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux';
 import { toastr } from 'react-redux-toastr'
+import Input from '../../components/common/Input'
 
 import axios from 'axios'
-const BASE_URL = 'http://localhost:8080/api/v1'
+const BASE_URL = 'http://localhost:8080/api'
 
-class LoginCadastro extends Component{
+const LoginCadastro = () => {
 
-    constructor(props) {
-        super(props)
-        this.keyHandler = this.keyHandler.bind(this)
+    const [usernameLogin, setUsernameLogin] = useState();
+    const [passwordLogin, setPasswordLogin] = useState();
+
+    const [firstName, setFirstName] = useState();
+    const [lastName, setLastName] = useState();
+    const [username, setUsername] = useState();
+    const [password, setPassword] = useState();
+    const [role, setRole] = useState();
+
+    const handleLoginRedesSociais = (e) => {
+        toastr.error('Erro','Funcionalidade ainda não foi implementada!')
     }
 
-    keyHandler(e) {
-        if(e.key === 'Enter'){
-            console.log("logar usuario")
+    const handleLogin = (e) => {
+        console.log("chegou no handleLogin")
+    }
+
+    const handleRegister = (e) => {
+        e.preventDefault();
+
+        if(firstName == null || firstName == "" || firstName.length < 2){
+            toastr.error('Erro','Nome deve ter pelo menos 2 caracteres!');
+        }else if(lastName == null || lastName == "" || lastName.length < 2){
+            toastr.error('Erro','Último nome deve ter pelo menos 2 caracteres!');
+        }else if(username == null || username == "" || username.length < 3){
+            toastr.error('Erro','Nome de usuário deve ter pelo menos 3 caracteres!');
+        }else if(password == null || password == "" || password.length < 8){
+            toastr.error('Erro','Senha deve ter pelo menos 8 caracteres!');
+        }else if(role == null || role == ""){
+            toastr.error('Erro','Escolha um perfil para seu usuário!');
+        }else{
+            let userRegister = "";
+            if(role == "Cliente"){
+                userRegister = {
+                    "firstname": firstName,
+                    "lastname": lastName,
+                    "username": username,
+                    "password": password,
+                    "roles": [
+                        {
+                            "id": 1,
+                            "name": "ROLE_USER"
+                        }
+                    ]
+                };
+            }else if(role == "Administrador"){
+                userRegister = {
+                    "firstname": firstName,
+                    "lastname": lastName,
+                    "username": username,
+                    "password": password,
+                    "roles": [
+                        {
+                            "id": 1,
+                            "name": "ROLE_USER"
+                        },
+                        {
+                            "id": 2,
+                            "name": "ROLE_MANAGER"
+                        },
+                        {
+                            "id": 3,
+                            "name": "ROLE_ADMIN"
+                        }
+                    ]
+                };
+            }else{
+                userRegister = {
+                    "firstname": firstName,
+                    "lastname": lastName,
+                    "username": username,
+                    "password": password,
+                    "roles": [
+                        {
+                            "id": 1,
+                            "name": "ROLE_USER"
+                        }
+                    ]
+                };
+            }
+    
+            axios.post(`${BASE_URL}/user/save`, userRegister)
+            .then(resp => {
+                console.log("resp.: ", resp);
+                toastr.success('Sucesso','Operação realizada com sucesso!')
+            })
+            .catch(e=> {
+                e.response.data.errors.forEach(error => toastr.error('Erro', error))
+            })
         }
     }
 
-    handleLogin = (e) => {
-        e.preventDefault();
-        console.log("chegou no handleLogin");
-        let userLogin = {username: 'leandro.pereira@capco.com', password:"12345678"};
-        axios.post(`http://localhost:8080/login`, userLogin)
-        .then(resp => {
-            console.log("resp.: ", resp);
-            this.setState(resp.data)
-            toastr.success('Sucesso','Operação realizada com sucesso!')
-        })
-        .catch(e=> {
-            e.response.data.errors.forEach(error => toastr.error('Erro', error))
-        })
-    }
-
-    handleRegisterUser(e){
-        e.preventDefault();
-        console.log("chegou no handle register");
-        
-        let user = { firstName: 'Leandro', lastName: 'Pereira', cpf:"111111111-12", email: 'leandro.pereira@capco.com', password:"12345678", role: 'User'};
-        axios.post(`${BASE_URL}/registration`, user)
-        .then(resp => {
-            console.log("resp.: ", resp);
-            this.setState(resp.data)
-            toastr.success('Sucesso','Operação realizada com sucesso!')
-        })
-        .catch(e=> {
-            e.response.data.errors.forEach(error => toastr.error('Erro', error))
-        })
-    }
-
-    render() {
-
-        return(
-            <div className="loginCadastro">
-                <div className="login">
-                    <form className='formCadastroRegistro' onSubmit={this.handleLogin}>
-                        <h1 className="poppins">Login</h1>
-                        <div className="username">
-                            <Input placeholder="Digite aqui o seu usuário"></Input>
+    return(
+        <div className="loginCadastro">
+            <div className="login">
+                <form className='formCadastroRegistro' onSubmit={handleLogin}>
+                    <h1 className="poppins">Login</h1>
+                    <div className="username">
+                        <input type="text" name="usernameLogin" placeholder="Digite aqui o seu e-mail" onChange={(e) => setUsernameLogin(e.target.value)} />
+                    </div>
+                    <div className="password">
+                        <input type="password" name="passwordLogin" placeholder="Digite aqui a sua senha" onChange={(e) => setPasswordLogin(e.target.value)} />
+                    </div>
+                    <div className="btLogin">
+                        <input className='btnSubmit' type="submit" value="Login" />
+                    </div>
+                    <div className="orLogin">
+                        <div className="line"></div>
+                        <span className='poppins orText'>or</span>
+                        <div className="line"></div>
+                    </div>
+                    <div className="redesSociais">
+                        <div className="facebook">
+                            <button className="facebookBt poppins" onClick={handleLoginRedesSociais}>Facebook</button>
                         </div>
-                        <div className="password">
-                            <Input type="password" placeholder="Digite aqui a sua senha"></Input>
+                        <div className="google">
+                            <button className="googleBt poppins" onClick={handleLoginRedesSociais}>Google</button>
                         </div>
-                        <div className="btLogin">
-                            <input type="submit" value="Login" />
-                            {/* <button type='submit' className='poppins'>LOGIN</button> */}
-                        </div>
-                        <div className="orLogin">
-                            <div className="line"></div>
-                            <span className='poppins orText'>or</span>
-                            <div className="line"></div>
-                        </div>
-                        <div className="redesSociais">
-                            <div className="facebook">
-                                <button className="facebookBt poppins">Facebook</button>
-                            </div>
-                            <div className="google">
-                                <button className="googleBt poppins">Google</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div className="lineBetween"></div>
-                <div className="cadastro">
-                    <form className='formCadastroRegistro' onSubmit={this.handleRegisterUser}>
-                        <h1 className="poppins">Registre-se</h1>
-                        <div className="username firstName">
-                            <Input placeholder="Digite aqui o seu primeiro nome"></Input>
-                        </div>
-                        <div className="username lastName">
-                            <Input placeholder="Digite aqui o seu último nome"></Input>
-                        </div>
-                        <div className="username">
-                            <Input placeholder="Digite aqui o seu e-mail"></Input>
-                        </div>
-                        <div className="password">
-                            <Input type="password" placeholder="Digite aqui a sua senha"></Input>
-                        </div>
-                        <div className="perfil">
-                            <span className="perfilText poppins">Perfil:</span>
-                            <div className="optionsPefil">
-                                <div className="option1">
-                                    <input type="radio" id="cliente" name="perfil" value="Cliente"></input>
-                                    <label htmlFor="cliente">Cliente</label>
-                                </div>
-                                <div className="option2">
-                                    <input type="radio" id="administrador" name="perfil" value="Administrador"></input>
-                                    <label htmlFor="cliente">Administrador</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="btRegistrar">
-                            <input type="submit" value="Registrar" />
-                            {/* <button type='submit' className='poppins' onClick={() => this.handleRegisterUser()}>REGISTRAR</button> */}
-                        </div>
-                        <div className="orLogin">
-                            <div className="line"></div>
-                            <span className='poppins orText'>or</span>
-                            <div className="line"></div>
-                        </div>
-                        <div className="redesSociais">
-                            <div className="facebook">
-                                <button className="facebookBt poppins">Facebook</button>
-                            </div>
-                            <div className="google">
-                                <button className="googleBt poppins">Google</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
-        )
-
-    }
+            <div className="lineBetween"></div>
+            <div className="cadastro">
+                <form className='formCadastroRegistro' onSubmit={handleRegister}>
+                    <h1 className="poppins">Registre-se</h1>
+                    <div className="username firstName">
+                        <input type="text" name="firstName" placeholder="Digite aqui o seu primeiro nome" onChange={(e) => setFirstName(e.target.value)} />
+                    </div>
+                    <div className="username lastName">
+                        <input type="text" name="lastName" placeholder="Digite aqui o seu último nome" onChange={(e) => setLastName(e.target.value)} />
+                    </div>
+                    <div className="username">
+                        <input type="text" name="username" placeholder="Digite aqui o seu e-mail" onChange={(e) => setUsername(e.target.value)} />
+                    </div>
+                    <div className="password">
+                        <input type="password" name="password" placeholder="Digite aqui a sua senha" onChange={(e) => setPassword(e.target.value)} />
+                    </div>
+                    <div className="perfil">
+                        <span className="perfilText poppins">Perfil:</span>
+                        <div className="optionsPefil">
+                            <div className="option1">
+                                <input type="radio" id="cliente" name="perfil" value="Cliente" onChange={(e) => setRole(e.target.value)}></input>
+                                <label htmlFor="cliente">Cliente</label>
+                            </div>
+                            <div className="option2">
+                                <input type="radio" id="administrador" name="perfil" value="Administrador" onChange={(e) => setRole(e.target.value)}></input>
+                                <label htmlFor="cliente">Administrador</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="btRegistrar">
+                        <input className='btnSubmit' type="submit" value="Registrar" />
+                    </div>
+                    <div className="orLogin">
+                        <div className="line"></div>
+                        <span className='poppins orText'>or</span>
+                        <div className="line"></div>
+                    </div>
+                    <div className="redesSociais">
+                        <div className="facebook">
+                            <button className="facebookBt poppins" onClick={handleLoginRedesSociais}>Facebook</button>
+                        </div>
+                        <div className="google">
+                            <button className="googleBt poppins" onClick={handleLoginRedesSociais}>Google</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    )
 
 }
 
-const mapStateToProps = state => ({user: state.user.user})
-const mapDispatchToProps = dispatch => bindActionCreators({ login }, dispatch)
-
-export default connect(mapStateToProps, mapDispatchToProps)(LoginCadastro)
+export default LoginCadastro
