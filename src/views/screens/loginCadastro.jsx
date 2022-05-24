@@ -22,7 +22,35 @@ const LoginCadastro = () => {
     }
 
     const handleLogin = (e) => {
-        console.log("chegou no handleLogin")
+        e.preventDefault();
+        console.log("chegou no handleLogin");
+        if(usernameLogin == null || usernameLogin == "" || usernameLogin.length < 3){
+            toastr.error('Erro','Nome de usuário deve ter pelo menos 3 caracteres!');
+        }else if(passwordLogin == null || passwordLogin == "" || passwordLogin.length < 8){
+            toastr.error('Erro','Senha deve ter pelo menos 8 caracteres!');
+        }else{
+
+            const formData = new FormData();
+            formData.append('username',usernameLogin)
+            formData.append('password',passwordLogin)
+
+            axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
+            axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+
+            axios.post(`http://localhost:8080/api/login`, formData, {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Content-Type': 'multipart/form-data',
+                  }
+            })
+            .then(resp => {
+                console.log("resp login.: ", resp);
+                toastr.success('Sucesso','Operação realizada com sucesso!')
+            })
+            .catch(e=> {
+                e.response.data.errors.forEach(error => toastr.error('Erro', error))
+            })
+        }
     }
 
     const handleRegister = (e) => {
