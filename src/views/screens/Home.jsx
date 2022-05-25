@@ -52,9 +52,6 @@ const Home = props => {
             <HomeAgenda></HomeAgenda>
             <Galeria></Galeria>
             <Avaliacoes></Avaliacoes>
-            {/* <UsuarioInfo state={state } />
-            <button className="btn" onClick={ () => login(dispatch, user)}>logar</button>
-            <button className="btn" onClick={ () => login(dispatch, initialState.user)}>deslogar</button> */}
         </div>
     )
     

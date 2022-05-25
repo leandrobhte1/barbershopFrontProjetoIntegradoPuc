@@ -1,14 +1,21 @@
-import { useState } from "react";
+import { useState, useReducer } from "react";
 
 import { toastr } from 'react-redux-toastr'
 import Input from '../../components/common/Input'
 
 import ReactLoading from 'react-loading';
 
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { initialState, rootReducer as reducer } from '../../store'
+import { login } from '../../store/actions/user'
+
 import axios from 'axios'
 const BASE_URL = 'http://localhost:8080/api'
 
 const LoginCadastro = () => {
+
+    const [state, dispatch] = useReducer(reducer, initialState)
 
     const [usernameLogin, setUsernameLogin] = useState("");
     const [passwordLogin, setPasswordLogin] = useState("");
@@ -19,6 +26,8 @@ const LoginCadastro = () => {
     const [password, setPassword] = useState("");
     const [role, setRole] = useState(null);
     const [loading, setLoading] = useState(false);
+
+    console.log("state ATUAL.: ", state);
 
     const handleLoginRedesSociais = (e) => {
         toastr.error('Erro','Funcionalidade ainda não foi implementada!')
@@ -52,6 +61,13 @@ const LoginCadastro = () => {
                 console.log("resp login.: ", resp);
                 setUsernameLogin("");
                 setPasswordLogin("");
+                let userLogin = {
+                    "username": usernameLogin,
+                    "logado": true,
+                    "access_token": resp.data.access_token,
+                    "refresh_token": resp.data.refresh_token
+                };
+                login(dispatch, userLogin);
                 setLoading(false);
                 toastr.success('Sucesso','Operação realizada com sucesso!')
             })
@@ -236,4 +252,23 @@ const LoginCadastro = () => {
 
 }
 
-export default LoginCadastro
+function mapStateToProps(state) {
+    return {
+      user: state.user.user,
+    };
+  }
+  
+  function mapDispatchToProp(dispatch) {
+    return {
+        login(user) {
+        // action creator -> action
+        const action = login(user);
+        dispatch(action);
+      },
+    };
+  }
+  
+  export default connect(
+      mapStateToProps,
+      mapDispatchToProp
+  )(LoginCadastro);

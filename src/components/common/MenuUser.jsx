@@ -17,7 +17,7 @@ const MenuUser = props => {
             <div className="naoLogado">
                 <ul className="top-menu top-menu-user">
                     <li className={`${props.state.user.name ? 'd-flex' : 'd-none'}`}>
-                        <UsuarioInfo state={state } />
+                        <UsuarioInfo />
                     </li>
                     <li className={`${props.state.user.name ? 'd-none' : 'd-flex'}`}>
                         <Link to="login-cadastro">Login</Link>

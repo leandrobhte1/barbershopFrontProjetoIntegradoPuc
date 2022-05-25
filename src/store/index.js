@@ -21,7 +21,7 @@ export const rootReducer = combineReducers({
 // }
 
 export const initialState = {
-    user: {user: {name: '', role: '', logado: false}, menuUserOpen: false},
+    user: {user: {username: '', logado: false, access_token: '', refresh_token: ''}, menuUserOpen: false},
     tab: {selected: '', visible: {}},
     search: '',
 }

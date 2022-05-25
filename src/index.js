@@ -6,22 +6,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "swiper/css/bundle";
 
 import { Provider } from 'react-redux'
-// import { storeConfig } from './store/index';
-
-import { applyMiddleware, createStore } from 'redux'
-import thunk from 'redux-thunk'
 import { rootReducer as reducers } from './store/index'
 
-const devTools = window.__REDUX_DEVTOOLS_EXTENSION__ 
-    && window.__REDUX_DEVTOOLS_EXTENSION__()
-const store = applyMiddleware(thunk)(createStore)(reducers, devTools)
+import configStore from './storeNew/storeConfig'
 
-//const store = storeConfig()
-// const store = createStore(reducers, devTools)
+const store = configStore()
 
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <React.StrictMode>
+            <App />
+        </React.StrictMode>
     </Provider>,
     document.getElementById('root')
 )

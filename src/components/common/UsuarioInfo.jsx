@@ -9,38 +9,43 @@ import { login } from '../../store/actions/user'
 import { toastr } from 'react-redux-toastr'
 
 import { handleMenuChange } from '../../store/actions/menuUserAction'
+import { connect } from 'react-redux'
 
-const UsuarioInfo = props => {
+function UsuarioInfo(props){
 
-    const [state, dispatch] = useReducer(reducer, initialState)
+    const { state } = props;
+    console.log("PROPPPSSS.: ", state)
 
-    // useEffect(() => {
-    //     let user = { name: 'Leandro', role: 'Admin', logado: true};
-    //     login(dispatch, user)
-    //     toastr.success('Sucesso','Login realizado com sucesso!')
-    // }, []);
+    //console.log("state.: ", state);
 
     return (
-        <div className='usuarioInfo' onClick={ () => handleMenuChange(dispatch, state.user.menuUserOpen)}>
-            <If test={state && state.user.user.name}>
+        <div className='usuarioInfo'>
+            {/* <If test={state && state.user.user.name}> */}
+            <h1>{state.user.user.username}</h1>
                 <div className="text">
-                    <span>Olá, <strong>{state.user.user.name}</strong>!</span>    
-                    <span className="role">{state.user.user.role}</span>
+                    <span>Olá, <strong>ok</strong>!</span>    
+                    <span className="role">ok</span>
                 </div>
                 <img className='imgUser' src={User} alt="imgUser" />
-                {state.user.menuUserOpen &&
+                {/* {state.user.menuUserOpen &&
                     <div className="optionsMenu">
                         <OptionsMenu></OptionsMenu>
                     </div>
-                }
-                <Else>
+                } */}
+                {/* <Else>
                     <span>Seja bem-vindo amigão!</span>    
                 </Else>
-            </If>
+            </If> */}
         </div>
     )
 
 
 }
 
-export default UsuarioInfo
+function mapStateToProps(state) {
+    return {
+        state: state,
+    };
+  }
+  
+  export default connect(mapStateToProps)(UsuarioInfo);
