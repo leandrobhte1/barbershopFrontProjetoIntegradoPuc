@@ -522,7 +522,19 @@ ul{
     margin-top: 70px;
 }
 
+.loadingArea{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    transform: translateY(50%);
+}
+
 .loginCadastro{
+    margin: 0 auto;
+}
+
+.loginCadastro .area{
     padding: 100px;
     display: flex;
     flex-direction: row;
