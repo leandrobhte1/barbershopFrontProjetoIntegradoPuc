@@ -40,6 +40,8 @@ const LoginCadastro = () => {
             axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
             axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
+            setLoading(true);
+
             axios.post(`http://localhost:8080/api/login`, formData, {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
@@ -50,9 +52,11 @@ const LoginCadastro = () => {
                 console.log("resp login.: ", resp);
                 setUsernameLogin("");
                 setPasswordLogin("");
+                setLoading(false);
                 toastr.success('Sucesso','Operação realizada com sucesso!')
             })
             .catch(e=> {
+                setLoading(false);
                 e.response.data.errors.forEach(error => toastr.error('Erro', error))
             })
         }
